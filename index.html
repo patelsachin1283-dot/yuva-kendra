@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>સ્વાધ્યાય પરિવાર</title>
+    <title>સ્વાધ્યાય પરિવાર - મનુષ્યગૌરવ દિન</title>
+    <meta name="description" content="યુવા કેન્દ્ર - આત્મગૌરવ + પરસન્માન = મનુષ્યગૌરવ દિન. સ્વાધ્યાય પરિવારની ઉજવણી." />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,157 +14,549 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;700;900&display=swap" rel="stylesheet" />
 
     <style>
+      :root {
+        --green-dark: rgb(8, 41, 28);
+        --orange: rgb(238, 125, 57);
+        --orange-light: rgba(238, 125, 57, 0.18);
+        --gold: #f5c842;
+        --sky: #7ecbff;
+        --earth: #8B5E3C;
+        --earth-light: #c49a6c;
+        --leaf: #4caf50;
+        --leaf-dark: #2d7a2d;
+        --trunk: #6b3a1f;
+      }
+
+      * { box-sizing: border-box; }
+
       body {
-        background-color: rgb(8, 41, 28);
+        background-color: var(--green-dark);
+        font-family: 'Noto Sans Gujarati', sans-serif;
+        letter-spacing: 0.02cm;
+        overflow-x: hidden;
       }
 
-      .font-size {
+      .font-size  { font-weight: bold; font-size: 12px; }
+      .font-color { color: var(--orange); }
+
+      /* ─── HEADER ─────────────────────────────────────────── */
+      .header-icon {
+        width: 38px; height: 38px;
+        border: 1.5px solid rgba(255,255,255,0.5);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.05);
+        flex-shrink: 0;
+      }
+
+      /* ─── HERO IMAGE ─────────────────────────────────────── */
+      .hero-img-wrap {
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+        margin: 0 12px;
+      }
+      .hero-img-wrap img { width: 100%; display: block; object-fit: cover; }
+
+      /* ─── SECTION LABEL ──────────────────────────────────── */
+      .section-label {
+        font-size: 11px;
         font-weight: bold;
-        font-size: 12px;
+        color: var(--orange);
+        letter-spacing: 0.08em;
+        opacity: 0.85;
       }
 
-      .font-color {
-        color: rgb(238, 125, 57);
+      /* ─── EQUATION BLOCK ─────────────────────────────────── */
+      .equation-block {
+        background: linear-gradient(135deg, rgba(238,125,57,0.08) 0%, rgba(8,41,28,0) 100%);
+        border: 1px solid rgba(238,125,57,0.2);
+        border-radius: 16px;
+        padding: 28px 20px 24px;
+        margin: 0 12px 20px;
+      }
+      .equation-top {
+        font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+        color: #e0e0e0;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+      .equation-result {
+        font-size: clamp(2rem, 10vw, 4.5rem);
+        color: var(--orange);
+        font-weight: 900;
+        line-height: 1.1;
+        text-shadow: 0 0 40px rgba(238,125,57,0.4);
+      }
+
+      /* ─── ANIMATION CANVAS ───────────────────────────────── */
+      .anim-scene {
+        position: relative;
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+        height: 280px;
+        overflow: hidden;
+        border-radius: 20px;
+        background: linear-gradient(180deg,
+          #0a1628 0%,
+          #0d2240 30%,
+          #0e3320 60%,
+          #1a2e10 80%,
+          #2a1a08 100%
+        );
+        box-shadow: 0 4px 32px rgba(0,0,0,0.6);
+      }
+
+      /* Sky / Stars */
+      .star {
+        position: absolute;
+        border-radius: 50%;
+        background: #fff;
+        opacity: 0;
+        animation: twinkle 6.5s ease-in-out infinite;
+      }
+
+      /* Ground */
+      .ground {
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 60px;
+        background: linear-gradient(180deg, var(--earth) 0%, #5a3010 100%);
+        border-radius: 0 0 20px 20px;
+      }
+      .ground-grass {
+        position: absolute;
+        top: -8px; left: 0; right: 0;
+        height: 16px;
+        background: linear-gradient(180deg, #3a7d22 0%, #5a9a30 100%);
+        border-radius: 50% 50% 0 0 / 60% 60% 0 0;
+      }
+
+      /* SEED */
+      .seed {
+        position: absolute;
+        width: 20px; height: 24px;
+        left: 50%; bottom: 44px;
+        transform: translateX(-50%) scale(0);
+        background: radial-gradient(ellipse at 40% 35%, #c8a055 0%, #7a4a10 80%);
+        border-radius: 50% 50% 45% 45% / 60% 60% 40% 40%;
+        box-shadow: inset 0 -3px 6px rgba(0,0,0,0.3);
+        animation: seedAnim 6.5s ease-in-out infinite;
+        z-index: 5;
+      }
+      .seed::after {
+        content: '';
+        position: absolute;
+        top: 2px; left: 50%;
+        transform: translateX(-50%);
+        width: 2px; height: 8px;
+        background: #2d7a2d;
+        border-radius: 2px;
+      }
+
+      /* Seed label */
+      .seed-label {
+        position: absolute;
+        bottom: 72px; left: 50%;
+        transform: translateX(-50%);
+        background: rgba(8,41,28,0.85);
+        border: 1px solid var(--orange);
+        color: var(--orange);
+        font-size: 10px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 20px;
+        white-space: nowrap;
+        opacity: 0;
+        animation: seedLabelAnim 6.5s ease-in-out infinite;
+        z-index: 10;
+      }
+
+      /* WATER DROPS */
+      .water-drop {
+        position: absolute;
+        width: 8px; height: 12px;
+        border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+        background: linear-gradient(180deg, var(--sky) 0%, #3ab0ff 100%);
+        opacity: 0;
+        z-index: 6;
+        animation: dropFall 6.5s ease-in-out infinite;
+      }
+      .water-drop:nth-child(1) { left: 42%; top: 30px; animation-delay: 0s; }
+      .water-drop:nth-child(2) { left: 50%; top: 20px; animation-delay: 0.15s; }
+      .water-drop:nth-child(3) { left: 58%; top: 35px; animation-delay: 0.3s; }
+
+      /* Water label */
+      .water-label {
+        position: absolute;
+        top: 55px; left: 50%;
+        transform: translateX(-50%);
+        background: rgba(8,41,28,0.85);
+        border: 1px solid var(--sky);
+        color: var(--sky);
+        font-size: 10px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 20px;
+        white-space: nowrap;
+        opacity: 0;
+        animation: waterLabelAnim 6.5s ease-in-out infinite;
+        z-index: 10;
+      }
+
+      /* TRUNK */
+      .trunk {
+        position: absolute;
+        bottom: 54px; left: 50%;
+        transform: translateX(-50%) scaleY(0);
+        transform-origin: bottom center;
+        width: 14px;
+        height: 80px;
+        background: linear-gradient(90deg, #3d1f08 0%, var(--trunk) 40%, #3d1f08 100%);
+        border-radius: 4px 4px 2px 2px;
+        animation: trunkGrow 6.5s ease-in-out infinite;
+        z-index: 4;
+      }
+
+      /* FOLIAGE */
+      .foliage-wrap {
+        position: absolute;
+        bottom: 118px; left: 50%;
+        transform: translateX(-50%) scale(0);
+        transform-origin: bottom center;
+        animation: foliageGrow 6.5s ease-in-out infinite;
+        z-index: 7;
+      }
+      .leaf-circle {
+        position: absolute;
+        border-radius: 50%;
+        background: radial-gradient(circle at 40% 35%, #6fcf57 0%, #2d7a2d 70%, #1a5c1a 100%);
+        box-shadow: inset 0 -6px 12px rgba(0,0,0,0.25), 0 0 20px rgba(76,175,80,0.3);
+      }
+      .leaf-center { width: 70px; height: 65px; left: -35px; top: -50px; }
+      .leaf-left   { width: 52px; height: 50px; left: -62px; top: -25px; }
+      .leaf-right  { width: 52px; height: 50px; left:  10px; top: -25px; }
+      .leaf-top    { width: 44px; height: 42px; left: -22px; top: -80px; }
+
+      /* Tree label */
+      .tree-label {
+        position: absolute;
+        bottom: 195px; left: 50%;
+        transform: translateX(-50%);
+        color: var(--gold);
+        font-size: 10px;
+        font-weight: 700;
+        text-align: center;
+        white-space: nowrap;
+        opacity: 0;
+        text-shadow: 0 0 10px rgba(245,200,66,0.6);
+        animation: treeLabelAnim 6.5s ease-in-out infinite;
+        z-index: 10;
+      }
+
+      /* SUN */
+      .sun {
+        position: absolute;
+        top: 18px; right: 20px;
+        width: 30px; height: 30px;
+        background: radial-gradient(circle, #ffe066 30%, #ffb300 100%);
+        border-radius: 50%;
+        opacity: 0;
+        box-shadow: 0 0 20px 6px rgba(255,200,50,0.4);
+        animation: sunAppear 6.5s ease-in-out infinite;
+        z-index: 3;
+      }
+
+      /* KEYFRAMES */
+      @keyframes twinkle {
+        0%,100% { opacity: 0; }
+        10%,20%  { opacity: 0.6; }
+        15%      { opacity: 0.2; }
+      }
+
+      @keyframes seedAnim {
+        0%      { transform: translateX(-50%) scale(0); opacity: 0; }
+        8%      { transform: translateX(-50%) scale(1);  opacity: 1; }
+        28%     { transform: translateX(-50%) scale(1);  opacity: 1; }
+        38%     { transform: translateX(-50%) scale(0);  opacity: 0; }
+        100%    { transform: translateX(-50%) scale(0);  opacity: 0; }
+      }
+
+      @keyframes seedLabelAnim {
+        0%      { opacity: 0; }
+        10%     { opacity: 1; }
+        28%     { opacity: 1; }
+        36%     { opacity: 0; }
+        100%    { opacity: 0; }
+      }
+
+      @keyframes dropFall {
+        0%,30%  { opacity: 0; top: 10px; }
+        35%     { opacity: 0.9; }
+        45%     { opacity: 0.9; top: 70px; }
+        52%     { opacity: 0; top: 90px; }
+        100%    { opacity: 0; top: 10px; }
+      }
+
+      @keyframes waterLabelAnim {
+        0%,30%  { opacity: 0; }
+        37%     { opacity: 1; }
+        48%     { opacity: 1; }
+        54%     { opacity: 0; }
+        100%    { opacity: 0; }
+      }
+
+      @keyframes trunkGrow {
+        0%,38%  { transform: translateX(-50%) scaleY(0); opacity: 0; }
+        50%     { transform: translateX(-50%) scaleY(0.5); opacity: 1; }
+        60%     { transform: translateX(-50%) scaleY(1);   opacity: 1; }
+        92%     { transform: translateX(-50%) scaleY(1);   opacity: 1; }
+        100%    { transform: translateX(-50%) scaleY(0);   opacity: 0; }
+      }
+
+      @keyframes foliageGrow {
+        0%,48%  { transform: translateX(-50%) scale(0); opacity: 0; }
+        62%     { transform: translateX(-50%) scale(1.1); opacity: 1; }
+        68%     { transform: translateX(-50%) scale(1);   opacity: 1; }
+        92%     { transform: translateX(-50%) scale(1);   opacity: 1; }
+        100%    { transform: translateX(-50%) scale(0);   opacity: 0; }
+      }
+
+      @keyframes treeLabelAnim {
+        0%,60%  { opacity: 0; }
+        70%     { opacity: 1; }
+        92%     { opacity: 1; }
+        100%    { opacity: 0; }
+      }
+
+      @keyframes sunAppear {
+        0%,50%  { opacity: 0; transform: scale(0.5); }
+        65%     { opacity: 1; transform: scale(1); }
+        92%     { opacity: 1; transform: scale(1); }
+        100%    { opacity: 0; transform: scale(0.5); }
+      }
+
+      /* ─── QUOTE BLOCK ─────────────────────────────────────── */
+      .quote-block {
+        background: linear-gradient(135deg, rgba(238,125,57,0.08) 0%, rgba(8,41,28,0) 100%);
+        border-left: 3px solid var(--orange);
+        border-radius: 0 12px 12px 0;
+        padding: 16px 18px;
+        margin: 0 12px 16px;
+        font-size: clamp(11px, 3vw, 13px);
+        color: #e0e0e0;
+        line-height: 1.8;
+      }
+      .quote-highlight {
+        color: var(--orange);
+        display: block;
+        margin: 8px 0;
+        font-weight: 700;
+      }
+
+      /* ─── DIVIDER ─────────────────────────────────────────── */
+      .divider {
+        border: none;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(238,125,57,0.4), transparent);
+        margin: 24px 20px;
+      }
+
+      /* ─── FOOTER ──────────────────────────────────────────── */
+      .footer-icon-wrap {
+        width: 58px; height: 58px;
+        border: 1.5px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.04);
+      }
+
+      /* ─── RESPONSIVE TWEAKS ───────────────────────────────── */
+      @media (max-width: 400px) {
+        .equation-result { font-size: clamp(1.7rem, 9vw, 3rem); }
+        .anim-scene { height: 240px; }
+        .foliage-wrap { bottom: 100px; }
+        .tree-label  { bottom: 168px; }
+      }
+      @media (min-width: 600px) {
+        .anim-scene  { max-width: 480px; height: 320px; }
+        .trunk       { height: 100px; }
+        .foliage-wrap{ bottom: 136px; }
+        .tree-label  { bottom: 228px; }
+        .leaf-center { width: 88px; height: 82px; left: -44px; top: -64px; }
+        .leaf-left   { width: 66px; height: 63px; left: -78px; top: -32px; }
+        .leaf-right  { width: 66px; height: 63px; left:  12px; top: -32px; }
+        .leaf-top    { width: 56px; height: 54px; left: -28px; top: -100px; }
       }
     </style>
   </head>
 
-  <body style="letter-spacing: 0.02cm">
-    <div class="d-flex justify-content-between m-2">
-      <span
-        class="border border-light rounded-circle text-light d-inline-flex align-items-center justify-content-center"
-        style="width: 35px; height: 35px"
-      >
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="rgb(238, 125, 57)"
-          stroke-width="1.8"
-        >
-          <circle cx="12" cy="7" r="2.8" />
-          <circle cx="7" cy="12" r="2.8" />
+  <body>
+    <!-- ══ HEADER ══════════════════════════════════════════ -->
+    <div class="d-flex justify-content-between align-items-center m-2 mt-3">
+      <span class="header-icon" id="icon-left">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+             stroke="rgb(238,125,57)" stroke-width="1.8">
+          <circle cx="12" cy="7"  r="2.8" />
+          <circle cx="7"  cy="12" r="2.8" />
           <circle cx="17" cy="12" r="2.8" />
           <circle cx="12" cy="17" r="2.8" />
         </svg>
       </span>
 
-      <h1 class="text-light" style="font-weight: bold">યુવા કેન્દ્ર</h1>
+      <h1 class="text-light mb-0" style="font-weight:900; font-size:clamp(1.4rem,6vw,2.2rem);">
+        યુવા કેન્દ્ર
+      </h1>
 
-      <span
-        class="border border-light rounded-circle text-light d-inline-flex align-items-center justify-content-center"
-        style="width: 35px; height: 35px"
-      >
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="rgb(238, 125, 57)"
-          stroke-width="1.8"
-        >
-          <circle cx="12" cy="7" r="2.8" />
-          <circle cx="7" cy="12" r="2.8" />
+      <span class="header-icon" id="icon-right">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+             stroke="rgb(238,125,57)" stroke-width="1.8">
+          <circle cx="12" cy="7"  r="2.8" />
+          <circle cx="7"  cy="12" r="2.8" />
           <circle cx="17" cy="12" r="2.8" />
           <circle cx="12" cy="17" r="2.8" />
         </svg>
       </span>
     </div>
-    <div class="w-100 mt-5 mb-5">
-      <img
-        src="swadhyay.jpg"
-        class="w-100"
-        style="object-fit: cover"
-        alt="Swadhyay"
-      />
+
+    <!-- ══ HERO IMAGE ══════════════════════════════════════ -->
+    <div class="hero-img-wrap mt-4 mb-4">
+      <img src="swadhyay.jpg" alt="Swadhyay Parivar" loading="lazy" />
     </div>
 
-    <div>
-      <h6 class="font-color font-size p-3 pt-5">
-        --- યુવાનો માટે • યુવાનો દ્વારા
-      </h6>
-      <div class="m-3 mt-5 mb-5">
-        <h3 class="text-light text-center" style="font-weight: bold">
-          આત્મગૌરવ + પરસન્માન =
-        </h3>
-        <h1 class="font-color display-2 text-center" style="font-weight: bold">
-          મનુષ્યગૌરવ દિન
-        </h1>
+    <!-- ══ SECTION LABEL ═══════════════════════════════════ -->
+    <p class="section-label ps-3 pt-2">--- યુવાનો માટે &bull; યુવાનો દ્વારા</p>
+
+    <!-- ══ EQUATION ════════════════════════════════════════ -->
+    <div class="equation-block text-center" id="equation-section">
+      <p class="equation-top mb-1">આત્મગૌરવ &nbsp;+&nbsp; પરસન્માન &nbsp;=</p>
+      <p class="equation-result mb-0">મનુષ્યગૌરવ દિન</p>
+    </div>
+
+    <!-- ══ ANIMATION SCENE ═════════════════════════════════ -->
+    <div class="anim-scene" id="anim-scene" aria-label="Animation: Seed becomes a tree">
+
+      <!-- Stars -->
+      <div class="star" style="width:2px;height:2px;top:12px;left:15%;animation-delay:0s"></div>
+      <div class="star" style="width:2px;height:2px;top:25px;left:30%;animation-delay:0.5s"></div>
+      <div class="star" style="width:3px;height:3px;top:8px; left:60%;animation-delay:1s"></div>
+      <div class="star" style="width:2px;height:2px;top:20px;left:75%;animation-delay:0.3s"></div>
+      <div class="star" style="width:2px;height:2px;top:35px;left:88%;animation-delay:0.8s"></div>
+
+      <!-- Sun -->
+      <div class="sun" id="sun"></div>
+
+      <!-- Water drops -->
+      <div class="water-drop" style="left:42%;"></div>
+      <div class="water-drop" style="left:50%;animation-delay:0.18s;"></div>
+      <div class="water-drop" style="left:58%;animation-delay:0.34s;"></div>
+
+      <!-- Water label -->
+      <div class="water-label" id="water-label">💧 પરસન્માન (પાણી)</div>
+
+      <!-- Trunk -->
+      <div class="trunk" id="trunk"></div>
+
+      <!-- Foliage -->
+      <div class="foliage-wrap" id="foliage">
+        <div class="leaf-circle leaf-left"></div>
+        <div class="leaf-circle leaf-right"></div>
+        <div class="leaf-circle leaf-center"></div>
+        <div class="leaf-circle leaf-top"></div>
       </div>
-      <p class="text-light ps-3 text-center" style="font-size: 12px">
+
+      <!-- Seed -->
+      <div class="seed" id="seed"></div>
+
+      <!-- Seed label -->
+      <div class="seed-label" id="seed-label">🌱 આત્મગૌરવ (બીજ)</div>
+
+      <!-- Tree label -->
+      <div class="tree-label" id="tree-label">🌳 મનુષ્યગૌરવ દિન</div>
+
+      <!-- Ground -->
+      <div class="ground">
+        <div class="ground-grass"></div>
+      </div>
+    </div>
+
+    <!-- ══ BODY TEXT ════════════════════════════════════════ -->
+    <div class="px-3 mt-4">
+      <p class="text-light text-center" style="font-size:clamp(12px,3.2vw,15px); line-height:1.9;">
         જગત મા કોઇ મનુષ્ય હલકો નથી.<br />
-        જે ઈશ્વર મારી અંદર બેઠો છે તે ઈશ્વર બીજા ની અંદર પણ બેઠોછે.<br />
+        જે ઈશ્વર મારી અંદર બેઠો છે તે ઈશ્વર બીજા ની અંદર પણ બેઠો છે.<br />
         આ વિચાર પૂજનીય દાદાજીએ સમજાવ્યો છે.
       </p>
 
-      <p class="text-center text-light mt-5" style="font-size: 12px">
-        આપને અને આપના પરિવારને મનુષ્યગોરવ દિનની હાર્દિક શુભેચ્છા. <br />
-        <span class="font-size">"જય યોગેશ્વર"</span>
+      <p class="text-center text-light mt-4" style="font-size:clamp(12px,3.2vw,15px);">
+        આપને અને આપના પરિવારને મનુષ્યગૌરવ દિનની હાર્દિક શુભેચ્છા.<br />
+        <span class="font-color font-size">"જય યોગેશ્વર"</span>
       </p>
 
-      <div class="text-center text-light mt-5 p-2" style="font-size: 12px">
-        પૂજનીય દાદાજીએ કહ્યું છે કે <br />
-        <div class="font-color mt-2">
-          "માણસની કિંમત માત્ર તેની પાસે કેટલા પૈસા કે ભૌતિક સંપતિ છે તેના પરથી જ
-          નથી થતી, પણ એક મનુષ્ય તરીકે પણ તેની કિંમત છે".
-        </div>
-        <br />
-        આ માટેના કારણ તરીકે પાંડુરંગ શાસ્ત્રીજીએ ભગવાન શ્રી કૃષ્ણના ગીતામાાં
-        કહેલાં વચનને ટાંક્યું છે. એમાાં ભગવાને કહ્યું છે કે,
-        <div class="font-color m-2">सर्वस्र्चाहम हदयीसन्निवर्ष्टो</div>
-        (અર્થ: હું સર્વના હદયમાાં બિરાજમાન છું) તેથી માણસે ભગવાન મારી સાથે જ છે
-        તે વાતનું ગૌરવ લેવું જોઈએ અને પોતાને મળેલ મનુષ્ય અવતારનું ગૌરવ લેવું
-        જોઈએ.
-        <div>આ વાત સમજાવતો દિવસ એટલે મનુષ્ય ગૌરવ દિન.</div>
+      <div class="quote-block mt-4">
+        <span style="font-size:11px; color:#aaa;">પૂજનીય દાદાજીએ કહ્યું છે કે</span>
+        <span class="quote-highlight">
+          "માણસની કિંમત માત્ર તેની પાસે કેટલા પૈસા કે ભૌતિક સંપતિ છે
+          તેના પરથી જ નથી થતી, પણ એક મનુષ્ય તરીકે પણ તેની કિંમત છે".
+        </span>
+        <span style="font-size:clamp(11px,3vw,13px); color:#ccc;">
+          આ માટેના કારણ તરીકે પાંડુરંગ શાસ્ત્રીજીએ ભગવાન શ્રી કૃષ્ણના ગીતામાાં
+          કહેલાં વચનને ટાંક્યું છે. એમાાં ભગવાને કહ્યું છે કે,
+        </span>
+        <span class="quote-highlight" style="font-family:serif; font-size:1.05em;">
+          सर्वस्र्चाहम हदयीसन्निवर्ष्टो
+        </span>
+        <span style="font-size:clamp(11px,3vw,13px); color:#ccc;">
+          (અર્થ: હું સર્વના હૃદયમાાં બિરાજમાન છું) તેથી માણસે ભગવાન મારી
+          સાથે જ છે તે વાતનું ગૌરવ લેવું જોઈએ અને પોતાને મળેલ મનુષ્ય
+          અવતારનું ગૌરવ લેવું જોઈએ.
+        </span>
+        <span class="quote-highlight" style="color:var(--gold);">
+          આ વાત સમજાવતો દિવસ એટલે મનુષ્ય ગૌરવ દિન.
+        </span>
       </div>
     </div>
 
-    <div class="mt-5 text-center">
-      <span
-        class="border border-light rounded-circle text-light d-inline-flex align-items-center justify-content-center"
-        style="width: 55px; height: 55px"
-      >
-        <svg
-          width="35"
-          height="35"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="rgb(238, 125, 57)"
-          stroke-width="1.8"
-        >
-          <circle cx="12" cy="7" r="2.8" />
-          <circle cx="7" cy="12" r="2.8" />
+    <!-- ══ FOOTER ══════════════════════════════════════════ -->
+    <hr class="divider" />
+
+    <div class="text-center mt-4">
+      <span class="footer-icon-wrap">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none"
+             stroke="rgb(238,125,57)" stroke-width="1.8">
+          <circle cx="12" cy="7"  r="2.8" />
+          <circle cx="7"  cy="12" r="2.8" />
           <circle cx="17" cy="12" r="2.8" />
           <circle cx="12" cy="17" r="2.8" />
         </svg>
       </span>
     </div>
-    <div>
-      <p class="font-color font-size text-center mt-4">
-        હૃદયમાં ભાવ • જીવનમાં સેવા
-      </p>
-    </div>
 
-    <div>
-      <h1 class="text-light text-center" style="font-weight: bold">
-        જય યોગેશ્વર
-      </h1>
-    </div>
-    <p class="text-light text-center">------</p>
-    <div class="d-flex justify-content-between m-2">
-      <span
-        ><small><i class="bi bi-flower2 text-light"></i></small
-      ></span>
-      <div class="text-light font-size text-center p-1">
+    <p class="font-color font-size text-center mt-3">
+      હૃદયમાં ભાવ &bull; જીવનમાં સેવા
+    </p>
+
+    <h2 class="text-light text-center" style="font-weight:900; font-size:clamp(1.5rem,6vw,2.2rem);">
+      જય યોગેશ્વર
+    </h2>
+
+    <p class="text-light text-center" style="opacity:0.4;">──────</p>
+
+    <div class="d-flex justify-content-between align-items-center m-2 mb-4">
+      <span><small><i class="bi bi-flower2 text-light" style="font-size:1.1rem;"></i></small></span>
+      <div class="text-light font-size text-center">
         <span class="font-color">યુવા કેન્દ્ર</span>
-        :- પ્રેમ, પ્રેરણા અને પ્રગતિનું સ્થાન
+        &nbsp;:- પ્રેમ, પ્રેરણા અને પ્રગતિનું સ્થાન
       </div>
-      <span
-        ><small><i class="bi bi-flower2 text-light"></i></small
-      ></span>
+      <span><small><i class="bi bi-flower2 text-light" style="font-size:1.1rem;"></i></small></span>
     </div>
   </body>
 </html>
